@@ -1,5 +1,0 @@
-name: astrbot_plugin_mma_secretariat # 这是你的插件的唯一识别名。
-desc: 数学建模协会小数秘书处模块 # 插件简短描述
-version: 1.0.0 # 插件版本号。格式：v1.1.1 或者 v1.1
-author: dreamDust # 作者
-repo: https://github.com/dreamingDusting/astrbot_plugin_mma_secretariat.git # 插件的仓库地址
