@@ -1,0 +1,35 @@
+{
+    "notice_group_id":{
+        "type":"string",
+        "default":"qq:GroupMessage:1061182818"
+    },
+    "secretariat_group_id":{
+        "type":"string",
+        "default":"qq:FriendMessage:3085866728"
+    },
+    "department_contacts":{
+        "type":"object",
+        "items":{
+            "技术部":{
+                "type":"string",
+                "default":"qq:FriendMessage:1727287294"
+            },
+            "宣传部":{
+                "type":"string",
+                "default":"qq:FriendMessage:2502251941"
+            },
+            "组织部":{
+                "type":"string",
+                "default":"qq:FriendMessage:1357325271"
+            },
+            "学术部":{
+                "type":"string",
+                "default":"qq:FriendMessage:481373196"
+            },
+            "外联部":{
+                "type":"string",
+                "default":"qq:FriendMessage:1727287294"
+            }
+        }
+    }
+}
