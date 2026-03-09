@@ -1,11 +1,21 @@
 {
     "notice_group_id":{
         "type":"string",
-        "default":"qq:GroupMessage:1061182818"
+        "default":"qq:GroupMessage:1062675992"
     },
     "secretariat_group_id":{
         "type":"string",
-        "default":"qq:FriendMessage:3085866728"
+        "default":"qq:GroupMessage:1063542698"
+    },
+    "web_host":{
+        "type":"string",
+        "default":"0.0.0.0",
+        "description":"Web服务监听地址，0.0.0.0允许外部访问"
+    },
+    "web_port":{
+        "type":"int",
+        "default":8081,
+        "description":"Web服务端口"
     },
     "department_contacts":{
         "type":"object",

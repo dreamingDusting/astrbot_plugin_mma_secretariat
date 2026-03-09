@@ -4,9 +4,9 @@ from .task_database import task_database, Task
 from typing import Optional, Dict, Any
 
 class secretariat:
-    ROOT_WHITELIST = [1727287294, 3085866728]
+    ROOT_WHITELIST = [1727287294]
 
-    ADMIN_WHITELIST = [1727287294, 3085866728]
+    ADMIN_WHITELIST = [1727287294]
     
     DEPARTMENT_CONTACTS = {
         "技术部": '',
@@ -22,7 +22,7 @@ class secretariat:
     
     @staticmethod
     def _check_root_permission(qq_number: int) -> bool:
-        return qq_number in secretariat.ADMIN_WHITELIST
+        return qq_number in secretariat.ROOT_WHITELIST
 
     @staticmethod
     def _check_permission(qq_number: int) -> bool:

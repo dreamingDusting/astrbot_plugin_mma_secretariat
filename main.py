@@ -3,9 +3,12 @@ from astrbot.api.star import Context, Star, register
 from astrbot.api import logger, AstrBotConfig
 
 import re
+import asyncio
+from aiohttp import web
 
 from .secretariat import *
 from .datetime_validator import *
+from .secretariat_web import SecretariatWeb
 
 @register("astrbot_plugin_mma_secretariat", "dreamDust", "数学建模协会小数秘书处模块", "1.0.0")
 class MMASecretariatPlugin(Star):
@@ -16,12 +19,45 @@ class MMASecretariatPlugin(Star):
         secretariat.SECRETARIAT_GROUP_ID = self.config['secretariat_group_id']
         for department in self.config['department_contacts'].keys():
             secretariat.DEPARTMENT_CONTACTS[department] = self.config['department_contacts'][department]
+        
+        self.secretariat_web = SecretariatWeb(self.config, self.context)
 
     async def initialize(self):
         """可选择实现异步的插件初始化方法，当实例化该插件类之后会自动调用该方法。"""
+        self.web_runner = None
+        web_port = self.config.get('web_port', 8081)
+        web_host = self.config.get('web_host', '0.0.0.0')
+        
+        app = web.Application()
+        
+        async def cors_middleware(app, handler):
+            async def middleware(request):
+                if request.method == 'OPTIONS':
+                    response = web.Response()
+                    response.headers['Access-Control-Allow-Origin'] = '*'
+                    response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+                    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+                    return response
+                response = await handler(request)
+                response.headers['Access-Control-Allow-Origin'] = '*'
+                return response
+            return middleware
+        
+        app.middlewares.append(cors_middleware)
+        app.router.add_post('/webhook', self.secretariat_web.handle_request)
+        
+        self.web_runner = web.AppRunner(app)
+        await self.web_runner.setup()
+        site = web.TCPSite(self.web_runner, web_host, web_port)
+        await site.start()
+        
+        logger.info(f"秘书处Web服务已启动: http://{web_host}:{web_port}/webhook")
 
     async def terminate(self):
         """可选择实现异步的插件销毁方法，当插件被卸载/停用时会调用。"""
+        if self.web_runner:
+            await self.web_runner.cleanup()
+            logger.info("秘书处Web服务已停止")
 
     @filter.command("create_task", alias={'创建任务'}, priority=1)
     async def create_task(self, event: AstrMessageEvent, content: str, deadline: str, department: str):
