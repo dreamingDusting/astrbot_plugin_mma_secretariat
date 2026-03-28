@@ -22,23 +22,23 @@
         "items":{
             "技术部":{
                 "type":"string",
-                "default":"qq:FriendMessage:1727287294"
+                "default":"1727287294"
             },
             "宣传部":{
                 "type":"string",
-                "default":"qq:FriendMessage:2502251941"
+                "default":"2502251941"
             },
             "组织部":{
                 "type":"string",
-                "default":"qq:FriendMessage:1357325271"
+                "default":"1357325271"
             },
             "学术部":{
                 "type":"string",
-                "default":"qq:FriendMessage:481373196"
+                "default":"481373196"
             },
             "外联部":{
                 "type":"string",
-                "default":"qq:FriendMessage:1727287294"
+                "default":"1727287294"
             }
         }
     }

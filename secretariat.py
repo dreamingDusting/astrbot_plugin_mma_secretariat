@@ -4,9 +4,9 @@ from .task_database import task_database, Task
 from typing import Optional, Dict, Any
 
 class secretariat:
-    ROOT_WHITELIST = [1727287294]
+    ROOT_WHITELIST = [1727287294,2739876438]
 
-    ADMIN_WHITELIST = [1727287294]
+    ADMIN_WHITELIST = [1727287294,2739876438,1452745119,3524668574,2240502552]
     
     DEPARTMENT_CONTACTS = {
         "技术部": '',
